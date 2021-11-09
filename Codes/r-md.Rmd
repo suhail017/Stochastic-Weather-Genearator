@@ -1,0 +1,49 @@
+---
+title: "Weather Generator"
+author: "Suhail Mahmud"
+date: "11/8/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+This is a R markdown for weather generator visualization. It will be frequently updated and modified according to the work requirement.
+
+
+
+## Code
+```{r echo=TRUE}
+library(readxl)
+library(xts)
+library(zoo)
+```
+# Reading the data
+```{r echo=TRUE}
+data <- read_excel("~/Downloads/selinsgrove_prcp_observation.xlsx")
+head(data)
+summary(data)
+```
+
+
+
+```{r echo=TRUE}
+P<- data[,1]
+P<-t(P)
+
+time_index <- seq(from = as.POSIXct("2000-01-01 00:00:00"), 
+                  to = as.POSIXct("2021-09-19 24:00:00"), by = "hour")
+
+plot(time_index,P)
+hist(P[!P==0 ], xlim = c(0,20))
+```
+
+                 
+
+
+
+
